@@ -16,7 +16,6 @@ export class UserController {
         })
     }
 
-
     password_change = (req: express.Request, res: express.Response) => {
         let username = req.body.username;
         let password = req.body.password;
@@ -55,7 +54,7 @@ export class UserController {
 
     register = (req: express.Request, res: express.Response) => {
         let name = req.body.name;
-        let surname = req.body.username;
+        let surname = req.body.surname;
         let username = req.body.username;
         let password = req.body.password;
         let number = req.body.number;
@@ -133,5 +132,43 @@ export class UserController {
             res.json({"message": "no username given"});
         }
         res.json({ "image": image_to_base64(req.body.username) });
+    }
+
+    update = (req: express.Request, res: express.Response) => {
+        let username = req.body.username;
+
+        if (!username) {
+            res.json({ "message": "username missing." });
+            return;
+        }
+
+        let name = req.body.name;
+        let surname = req.body.surname;
+        let number = req.body.number;
+        let email = req.body.email;
+        let image = req.body.image;
+
+        if (!name && !surname && !number && !email && !image) {
+            res.json({ "message": "fields missing." });
+            return;
+        }
+
+        User.findOne({ 'username': username }, (err, user) => {
+            if (err) { console.log(err); }
+            else {
+                if (name) user.name = name;
+                if (surname) user.surname = surname;
+                if (number) user.number = number;
+                if (email) user.email = email;
+                if (image) base64_to_image(username, image);
+                
+                user.save();
+                res.json({ "message": "success" });
+            }
+        });
+    }
+
+    actions = (req: express.Request, res: express.Response) => {
+        
     }
 }
