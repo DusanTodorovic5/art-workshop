@@ -22,7 +22,7 @@ const router = express.Router();
 
 router.use('/users', userRouter);
 router.use('/admin', adminRouter);
-router.use('/workshop', workshopRouter);
+router.use('/workshops', workshopRouter);
 
 
 app.use('/', router);
