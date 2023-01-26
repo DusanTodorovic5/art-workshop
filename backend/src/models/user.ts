@@ -29,6 +29,9 @@ let User = new Schema({
     },
     password_valid: {
         type: Number
+    },
+    likes: {
+        type: Array
     }
 });
 
