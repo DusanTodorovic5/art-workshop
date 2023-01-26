@@ -23,4 +23,8 @@ userRouter.route('/get_image').post(
     (req, res) => new UserController().get_image_for_user(req, res)
 );
 
+userRouter.route('/update').post(
+    (req, res) => new UserController().update(req, res)
+);
+
 export default userRouter;
