@@ -70,8 +70,20 @@ export class WorkshopController {
         });
     }
 
+    delete_comment = (req: express.Request, res: express.Response) => {
+        let id = req.body.id;
+
+        Comment.deleteOne({"_id" : id},(err, comments) => {
+            if (err) console.log(err);
+            else {
+                res.json({"message": "success"});
+            }
+        });
+    }
+
     get_comments = (req: express.Request, res: express.Response) => {
         let workshop = req.body.workshop;
+        
         Comment.find({ workshop: workshop}, (err, comments) => {
             if (err) console.log(err);
             else {

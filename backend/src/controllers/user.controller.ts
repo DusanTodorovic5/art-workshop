@@ -1,8 +1,8 @@
 import * as express from 'express';
 import { base64_to_image, check_size, image_to_base64 } from '../imager';
 import { send_password } from '../mailer';
-import user from '../models/user';
-import User from '../models/user'
+import User from '../models/user';
+import Workshop from '../models/workshop';
 
 export class UserController {
     login = (req: express.Request, res: express.Response) => {
@@ -169,6 +169,18 @@ export class UserController {
     }
 
     actions = (req: express.Request, res: express.Response) => {
-        
+        let username  = req.body.username;
+
+        User.findOne({ 'username': username }, (err, username_user) => {
+            if (err) { console.log(err); }
+            else {
+                Workshop.find({'username': username}, (err, comments) => {
+                    if (err) { res.json({"likes": username_user.likes, "comments": []}); }
+                    else {
+                        res.json({"likes": username_user.likes, "comments": comments});
+                    }
+                });
+            }
+        });
     }
 }
