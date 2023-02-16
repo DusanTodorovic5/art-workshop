@@ -68,7 +68,7 @@ export class UserController {
         }
 
         let org = req.body.org;
-        if (type == "org" && (!org.name || !org.address || !org.number)) {
+        if (type == "organizator" && (!org.name || !org.address || !org.number)) {
             res.json({ "message": "fields missing." });
             return;
         }
