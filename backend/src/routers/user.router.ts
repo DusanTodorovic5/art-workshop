@@ -27,4 +27,8 @@ userRouter.route('/update').post(
     (req, res) => new UserController().update(req, res)
 );
 
+userRouter.route('/actions').post(
+    (req, res) => new UserController().actions(req, res)
+);
+
 export default userRouter;
