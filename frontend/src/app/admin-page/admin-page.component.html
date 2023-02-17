@@ -1,4 +1,78 @@
 <app-navigation-bar></app-navigation-bar>
 <div class="container">
-    
+    <div class="row">
+        <div class="col">
+            <h1>All Users</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Picture</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Surname</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Organization Name</th>
+                        <th scope="col">Organization Address</th>
+                        <th scope="col">Organization Number</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let u of users">
+                        <td cope="row">
+                            <img *ngIf="u.image" src={{u.image}} height="60">
+                            <img *ngIf="!u.image" src="/assets/holder.png" height="60">
+                        </td>
+                        <td>
+                            {{u.name}}
+                        </td>
+                        <td>
+                            {{u.surname}}
+                        </td>
+                        <td>
+                            {{u.username}}
+                        </td>
+                        <td>
+                            {{u.phone}}
+                        </td>
+                        <td>
+                            {{u.email}}
+                        </td>
+                        <td>
+                            {{u.type}}
+                        </td>
+                        <td>
+                            <div *ngIf="u.organization">{{u.organization["name"]}}</div>
+                        </td>
+                        <td>
+                            <div *ngIf="u.organization">{{u.organization["address"]}}</div>
+                        </td>
+                        <td>
+                            <div *ngIf="u.organization">{{u.organization["number"]}}</div>
+                        </td>
+                        <td>
+                            {{u.status}}
+                        </td>
+                        <td>
+                            <div *ngIf="u.status == 'pending'">
+                                <button class="btn btn-primary m-1" (click)="accept(u)">Accept</button>
+                                <button class="btn btn-primary m-1" (click)="decline(u)">Decline</button>
+                            </div>
+                            <div *ngIf="u.status != 'pending'">
+                                <button class="btn btn-primary m-1" (click)="details(u)">Details</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6 col-xs-12">
+            
+        </div>
+    </div>
 </div>

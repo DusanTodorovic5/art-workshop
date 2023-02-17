@@ -11,4 +11,11 @@ export class AdminController {
             else res.json(user)
         });
     }
+
+    get_users = (req: express.Request, res: express.Response) => {
+        User.find({'type' : { $ne: "admin" }}, (err, users) => {
+            if (err) console.log(err);
+            else res.json(users)
+        });
+    }
 }

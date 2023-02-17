@@ -5,15 +5,19 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AdminService {
-    uri = 'http://localhost:4000/admin';
-    constructor(private http: HttpClient) { }
-  
-    login(username, password) {
-      const data = {
-        "username": username,
-        "password": password
-      };
+  uri = 'http://localhost:4000/admin';
+  constructor(private http: HttpClient) { }
 
-      return this.http.post(`${this.uri}/login`, data);
-    }
+  login(username, password) {
+    const data = {
+      "username": username,
+      "password": password
+    };
+
+    return this.http.post(`${this.uri}/login`, data);
   }
+
+  get_users() {
+    return this.http.get(`${this.uri}/get_users`);
+  }
+}

@@ -7,6 +7,7 @@ export class User {
     email:  string;
     type:  string;
     organization: Object;
+    status: string;
     password_valid: Number;
     likes: Array<string>;
     image: string;
