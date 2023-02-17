@@ -152,7 +152,7 @@ export class UserController {
                 if (surname) user.surname = surname;
                 if (number) user.number = number;
                 if (email) user.email = email;
-                if (image) base64_to_image(username, image);
+                if (image) { base64_to_image(image, username); }
 
                 user.save();
                 res.json({ "message": "success" });
