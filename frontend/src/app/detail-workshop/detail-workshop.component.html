@@ -1,0 +1,76 @@
+<app-navigation-bar></app-navigation-bar>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <table class="table table-striped">
+                <thead>
+                    <tr colspan="2">
+                        <img *ngIf="workshop.main_icon" src={{workshop.main_icon}} height="100">
+                        <img *ngIf="!workshop.main_icon" src="/assets/holder.png" height="100">
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Name</td>
+                        <td>{{workshop.name}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Place
+                        </td>
+                        <td>
+                            {{workshop.place}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Date
+                        </td>
+                        <td>
+                            {{workshop.date | date: 'dd-MM-yyyy'}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Short Description
+                        </td>
+                        <td>
+                            {{workshop.description}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Long Description
+                        </td>
+                        <td>
+                            {{workshop.long_description}}  
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Likes
+                        </td>
+                        <td>
+                            {{workshop.likes}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">
+                            Gallery
+                        </td>
+                        <td *ngFor="let w of workshop.icons" rowspan="2">
+                            <img src={{w}} height="200">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-6">
+            <button *ngIf="!avaliable()" class="btn btn-primary m-1" (click)="remove()">Remove me</button>
+            <button *ngIf="avaliable() && workshop.attendees.length < workshop.max_number" class="btn btn-primary m-1" (click)="signin()">Sign up</button>
+            <button *ngIf="avaliable() && workshop.attendees.length >= workshop.max_number" class="btn btn-primary m-1">Notify me when avaliable</button>
+        </div>
+    </div>
+    <span>{{message}}</span>
+</div>

@@ -47,4 +47,22 @@ export class WorkshopService {
 
       return this.http.post(`${this.uri}/get_comments_for_user`, data);
     }
+
+    remove_me(username, workshop) {
+      const data = {
+        "username": username,
+        "workshop": workshop
+      };
+
+      return this.http.post(`${this.uri}/remove_me`, data);
+    }
+
+    attend(username, workshop) {
+      const data = {
+        "username": username,
+        "workshop": workshop
+      };
+
+      return this.http.post(`${this.uri}/attend`, data);
+    }
   }

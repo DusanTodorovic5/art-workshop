@@ -30,6 +30,9 @@ let Workshop = new Schema({
     },
     icons: { 
         type: Array
+    },
+    max_number: {
+        type: Number
     }
 });
 

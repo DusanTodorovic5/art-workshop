@@ -8,4 +8,5 @@ export class Workshop {
     likes: number;
     main_icon: string;
     icons: Array<string>;
+    max_number: number;
 }

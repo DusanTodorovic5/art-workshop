@@ -1,9 +1,9 @@
 import * as express from 'express';
 import { main_image_to_base64 } from '../imager';
-import Workshop  from '../models/workshop'
-import User  from '../models/user'
+import Workshop from '../models/workshop'
+import User from '../models/user'
 import Comment from '../models/comment'
-export class WorkshopController { 
+export class WorkshopController {
     get = (req: express.Request, res: express.Response) => {
         Workshop.find({ date: { $gte: new Date() } }, (err, workshops) => {
             if (err) console.log(err);
@@ -19,7 +19,7 @@ export class WorkshopController {
     get_attended = (req: express.Request, res: express.Response) => {
         var username = req.body.username;
         if (!username) {
-            res.json({"message":"no username"});
+            res.json({ "message": "no username" });
             return;
         }
 
@@ -34,17 +34,57 @@ export class WorkshopController {
         });
     }
 
+    attend = (req: express.Request, res: express.Response) => {
+        var username = req.body.username;
+        var workshop = req.body.workshop;
+        Workshop.updateOne(
+            { "name": workshop },
+            {
+                "$push": {
+                    "attendees": username
+                }
+            }, function (err) {
+                if (err) {
+                    console.log(err);
+                    res.json({"message": "error"});
+                    return;
+                }
+                res.json({"message": "success"});
+            }
+        );
+    }
+
+    remove_me = (req: express.Request, res: express.Response) => {
+        var username = req.body.username;
+        var workshop = req.body.workshop;
+        Workshop.updateOne(
+            { "name": workshop },
+            {
+                "$pull": {
+                    "attendees": username
+                }
+            }, function (err) {
+                if (err) {
+                    console.log(err);
+                    res.json({"message": "error"});
+                    return;
+                }
+                res.json({"message": "success"});
+            }
+        );
+    }
+
     like = (req: express.Request, res: express.Response) => {
         let username = req.body.username;
         let name = req.body.name;
 
         Workshop.updateOne(
-            { "name": name }, 
+            { "name": name },
             { $inc: { likes: 1 } }
         );
 
         User.updateOne(
-            { "username": username }, 
+            { "username": username },
             { "$push": { "likes": name } }
         );
 
@@ -56,12 +96,12 @@ export class WorkshopController {
         let name = req.body.name;
 
         User.updateOne(
-            { "username": username }, 
+            { "username": username },
             { "$pull": { "likes": name } }
         );
 
         Workshop.updateOne(
-            { "name": name }, 
+            { "name": name },
             { $inc: { likes: -1 } }
         );
 
@@ -74,7 +114,7 @@ export class WorkshopController {
         let text = req.body.text;
 
         let _comment = new Comment({
-            username:username,
+            username: username,
             workshop: workshop,
             text: text
         });
@@ -83,7 +123,7 @@ export class WorkshopController {
             if (err) {
                 res.json({ "message": "error while inserting!" });
                 return;
-            } 
+            }
             res.json({ "message": "success" });
         });
     }
@@ -91,18 +131,18 @@ export class WorkshopController {
     delete_comment = (req: express.Request, res: express.Response) => {
         let id = req.body.id;
 
-        Comment.deleteOne({"_id" : id},(err, comments) => {
+        Comment.deleteOne({ "_id": id }, (err, comments) => {
             if (err) console.log(err);
             else {
-                res.json({"message": "success"});
+                res.json({ "message": "success" });
             }
         });
     }
 
     get_comments = (req: express.Request, res: express.Response) => {
         let workshop = req.body.workshop;
-        
-        Comment.find({ workshop: workshop}, (err, comments) => {
+
+        Comment.find({ workshop: workshop }, (err, comments) => {
             if (err) console.log(err);
             else {
                 res.json(comments);
@@ -112,8 +152,8 @@ export class WorkshopController {
 
     get_comments_for_user = (req: express.Request, res: express.Response) => {
         let username = req.body.username;
-        
-        Comment.find({ username: username}, (err, comments) => {
+
+        Comment.find({ username: username }, (err, comments) => {
             if (err) console.log(err);
             else {
                 res.json(comments);
