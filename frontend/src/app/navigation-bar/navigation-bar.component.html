@@ -1,6 +1,6 @@
 <nav *ngIf="!user" class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-    <a class="navbar-brand" href="#">Not registered</a>
+    <a class="navbar-brand" (click)="landing()" class="m-1 " style="text-decoration: none;color:white">Not registered</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -20,10 +20,11 @@
 
 <nav *ngIf="user && user.type == 'user'" class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-    <div class="navbar-brand" href="#">
+    <div class="navbar-brand">
       <img *ngIf="user.image" src={{user.image}} class="rounded-circle" height="50px">
       <img *ngIf="!user.image" src="/assets/holder.png" class="rounded-circle" height="50px">
-      {{user.username}}
+      <a (click)="landing()" class="m-1 " style="text-decoration: none;color:white">{{user.username}}</a>
+      
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from '../models/user.model';
 import { Workshop } from '../models/workshop.model';
 import { WorkshopService } from '../services/workshop.service';
@@ -17,7 +18,7 @@ export class LandingComponent implements OnInit {
   sortNameSwitch: boolean = true;
   sortDateSwitch: boolean = true;
   top5: Array<Workshop>;
-  constructor(private workshopService: WorkshopService) { }
+  constructor(private workshopService: WorkshopService, private router: Router) { }
 
   ngOnInit(): void {
     this.user  = JSON.parse(localStorage.getItem("user"));
@@ -83,4 +84,8 @@ export class LandingComponent implements OnInit {
     });
   }
 
+  details(w: Workshop) {
+    localStorage.setItem("curr_workshop", JSON.stringify(w));
+    this.router.navigate(["detail_ws"]);
+  }
 }

@@ -13,6 +13,10 @@ export class NavigationBarComponent implements OnInit {
 
   constructor(private router: Router) { 
   }
+
+  landing() {
+    this.router.navigate([""]);
+  }
   
   ngOnInit(): void { 
     this.user  = JSON.parse(localStorage.getItem("user"));
