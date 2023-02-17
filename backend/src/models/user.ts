@@ -32,6 +32,9 @@ let User = new Schema({
     },
     likes: {
         type: Array
+    },
+    status: {
+        type: String
     }
 });
 
