@@ -94,10 +94,10 @@ export class UserController {
                             "password": password,
                             "name": name,
                             "surname": surname,
-                            "number": number,
+                            "phone": number,
                             "email": email,
                             "type": type,
-                            "organization": org ? null : {
+                            "organization": !org ? null : {
                                 "name": org.name,
                                 "address": org.address,
                                 "number": org.number
