@@ -49,5 +49,6 @@ export class NavigationBarComponent implements OnInit {
   logout() {
     localStorage.clear();
     this.user = null;
+    this.router.navigate(['login']);
   }
 }
