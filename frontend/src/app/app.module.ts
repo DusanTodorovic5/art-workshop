@@ -10,6 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { LandingComponent } from './landing/landing.component';
 import { RegisterComponent } from './register/register.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { ProfileComponent } from './profile/profile.component';
+import { WorkshopsComponent } from './workshops/workshops.component';
+import { BecomeOrgComponent } from './become-org/become-org.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
     LoginComponent,
     LandingComponent,
     RegisterComponent,
-    AdminLoginComponent
+    AdminLoginComponent,
+    ProfileComponent,
+    WorkshopsComponent,
+    BecomeOrgComponent
   ],
   imports: [
     BrowserModule,
