@@ -32,7 +32,12 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    if (!this.good_size) {
+    if (this.image != "" && !this.good_size) {
+      return;
+    }
+
+    if (this.password != this.again_password) {
+      this.message = "Passwords do not match!";
       return;
     }
     this.image = this.image.replace(/^data:image\/[a-z]+;base64,/, "");
