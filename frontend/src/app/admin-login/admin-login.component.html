@@ -1,0 +1,18 @@
+<app-navigation-bar></app-navigation-bar>
+<div class="container">
+<form>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Username</label>
+        <input type="text" class="form-control" id="exampleInputEmail1"
+            placeholder="Enter username" name="username" [(ngModel)]='username'>
+        <small id="emailHelp" class="form-text text-muted">Unique username</small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" name="password" [(ngModel)]='password' class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <br>
+    <input type='button' value='Login' (click)='login()' class="btn btn-primary">
+</form>
+<span class='greska'>{{message}}</span>
+</div>
