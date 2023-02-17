@@ -24,6 +24,7 @@ export class RegisterComponent implements OnInit {
   org_name: string = null;
   org_address: string = null;
   org_number: string = null;
+  good_size: boolean = false;
   constructor(private userService: UsersService,private router: Router) { }
 
   ngOnInit(): void {
@@ -31,6 +32,10 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+    if (!this.good_size) {
+      return;
+    }
+    this.image = this.image.replace(/^data:image\/[a-z]+;base64,/, "");
     this.userService.register(
       this.name, 
       this.surname, 
@@ -46,6 +51,7 @@ export class RegisterComponent implements OnInit {
         "number": this.number
       }
     ).subscribe((res: Object) =>{
+      console.log(res);
       if (res["message"]) {
         this.message = res["message"];
         if (this.message == "success") {
@@ -62,6 +68,8 @@ export class RegisterComponent implements OnInit {
       const allowed_types = ['image/png', 'image/jpeg'];
       const max_height = 300;
       const max_width = 300;
+      const min_height = 100;
+      const min_width = 100;
 
       if (fileInput.target.files[0].size > max_size) {
         this.message =
@@ -79,15 +87,20 @@ export class RegisterComponent implements OnInit {
 
           if (img_height > max_height && img_width > max_width) {
             this.message =
-              'Maximum dimentions allowed ' +
-              max_height +
-              '*' +
-              max_width +
-              'px';
+              'Maximum dimensions allowed ' +
+              max_height + '*' + max_width + 'px';
+              this.good_size = false;
+            return false;
+          } else if (img_height < min_height && img_width > min_width) {
+            this.message =
+            'Maximum dimensions allowed ' +
+            min_height + '*' + min_width + 'px';
+            this.good_size = false;
             return false;
           } else {
             const imgBase64Path = e.target.result;
             this.image = imgBase64Path;
+            this.good_size = true;
           }
           return true;
         };
