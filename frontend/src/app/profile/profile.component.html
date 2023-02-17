@@ -1,1 +1,124 @@
-<p>profile works!</p>
+<app-navigation-bar></app-navigation-bar>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h3>My Profile</h3>
+            <form *ngIf="user">
+                <div class="form-group">
+                    <label for="forUsername">Username</label>
+                    <input type="text" class="form-control" id="forUsername" placeholder="{{user.username}}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="forName">Name</label>
+                    <input type="text" name="name" [(ngModel)]='name' class="form-control" id="forName"
+                        placeholder="{{name}}">
+                </div>
+                <div class="form-group">
+                    <label for="forSurname">Surname</label>
+                    <input type="text" name="surname" [(ngModel)]='surname' class="form-control" id="forSurname"
+                        placeholder="{{surname}}">
+                </div>
+                <div class="form-group">
+                    <label for="forPhone">Phone number</label>
+                    <input type="text" name="number" [(ngModel)]='number' class="form-control" id="forPhone"
+                        placeholder="{{number}}">
+                </div>
+                <div class="form-group">
+                    <label for="forEmail">Email</label>
+                    <input type="text" name="email" [(ngModel)]='email' class="form-control" id="forEmail"
+                        placeholder="{{email}}">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="exampleImageUpload">Profile picture</label>
+                    <input accept="image/png" type="file" (change)="processFile($event)" class="form-control"
+                        id="exampleImageUpload" placeholder="Profile Picture">
+                </div>
+                <br>
+                <input type='button' value='Update' (click)='update()' class="btn btn-primary">
+            </form>
+        </div>
+        <div class="col-6">
+            <h3>Workshops I attended</h3>
+
+            <button class="btn btn-primary m-1" (click)="sortByName()">Sort by Name</button>
+            <button class="btn btn-primary m-1" (click)="sortByDate()">Sort by Date</button>
+            <button class="btn btn-primary m-1" (click)="sortByPlace()">Sort by Place</button>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Picture</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Place</th>
+                        <th scope="col">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let w of atended">
+                        <td cope="row">
+                            <img *ngIf="w.main_icon" src={{w.main_icon}} height="100">
+                            <img *ngIf="!w.main_icon" src="/assets/holder.png" height="100">
+                        </td>
+                        <td>
+                            {{w.name}}
+                        </td>
+                        <td>
+                            {{w.date | date: 'dd-MM-yyyy'}}
+                        </td>
+                        <td>
+                            {{w.place}}
+                        </td>
+                        <td>
+                            {{w.description}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-6">
+            <h3>Likes</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Workshop</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let w of user.likes">
+                        <td cope="row">
+                            {{w}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-6">
+            <h3>Comments</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Workshop</th>
+                        <th scope="col">Text</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let w of comments">
+                        <td cope="row">
+                            {{w.workshop}}
+                        </td>
+                        <td>
+                            {{w.text}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <span>{{message}}</span>
+</div>

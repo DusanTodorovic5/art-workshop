@@ -18,13 +18,13 @@ export class RegisterComponent implements OnInit {
   number: string = "";
   email: string = "";
   image: string = "";
+  good_size: boolean = false;
   type: string = "";
   message: string = "";
   //org.name || !org.address || !org.number
   org_name: string = null;
   org_address: string = null;
   org_number: string = null;
-  good_size: boolean = false;
   constructor(private userService: UsersService,private router: Router) { }
 
   ngOnInit(): void {

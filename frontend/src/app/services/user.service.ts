@@ -52,8 +52,9 @@ export class UsersService {
       return this.http.post(`${this.uri}/register`, data);
     }
 
-    update(name, surname, number, email, image) {
+    update(username, name, surname, number, email, image) {
       const data = {
+        "username" : username,
         "name": name,
         "surname": surname,
         "number": number,

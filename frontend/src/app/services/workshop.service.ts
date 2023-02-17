@@ -24,7 +24,27 @@ export class WorkshopService {
 
     }
 
-    get_comments() {
+    get_comments(workshop) {
+      const data = {
+        "workshop": workshop
+      };
 
+      return this.http.post(`${this.uri}/get_comments`, data);
+    }
+
+    get_attended(username) {
+      const data = {
+        "username": username
+      };
+
+      return this.http.post(`${this.uri}/get_attended`, data);
+    }
+
+    get_comments_for_user(username) {
+      const data = {
+        "username": username
+      };
+
+      return this.http.post(`${this.uri}/get_comments_for_user`, data);
     }
   }

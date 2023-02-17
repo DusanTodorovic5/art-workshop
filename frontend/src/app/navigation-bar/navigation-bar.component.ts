@@ -18,12 +18,28 @@ export class NavigationBarComponent implements OnInit {
     this.user  = JSON.parse(localStorage.getItem("user"));
   }
 
+  update_user(): void {
+    this.user  = JSON.parse(localStorage.getItem("user"));
+  }
+
   login() {
     this.router.navigate(['login']);
   }
 
   register() {
     this.router.navigate(["register"]);
+  }
+
+  profile() {
+    this.router.navigate(["userProfile"]);
+  }
+
+  workshops() {
+    this.router.navigate(["workshopsPage"]);
+  }
+
+  become_org() {
+    this.router.navigate(["become_org"]);
   }
 
   logout() {

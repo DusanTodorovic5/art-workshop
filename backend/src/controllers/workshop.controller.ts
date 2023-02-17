@@ -16,6 +16,24 @@ export class WorkshopController {
         });
     }
 
+    get_attended = (req: express.Request, res: express.Response) => {
+        var username = req.body.username;
+        if (!username) {
+            res.json({"message":"no username"});
+            return;
+        }
+
+        Workshop.find({ attendees: username }, (err, workshops) => {
+            if (err) console.log(err);
+            else {
+                for (let workshop of workshops) {
+                    workshop.main_icon = main_image_to_base64(workshop.name);
+                }
+                res.json(workshops);
+            }
+        });
+    }
+
     like = (req: express.Request, res: express.Response) => {
         let username = req.body.username;
         let name = req.body.name;
@@ -85,6 +103,17 @@ export class WorkshopController {
         let workshop = req.body.workshop;
         
         Comment.find({ workshop: workshop}, (err, comments) => {
+            if (err) console.log(err);
+            else {
+                res.json(comments);
+            }
+        });
+    }
+
+    get_comments_for_user = (req: express.Request, res: express.Response) => {
+        let username = req.body.username;
+        
+        Comment.find({ username: username}, (err, comments) => {
             if (err) console.log(err);
             else {
                 res.json(comments);

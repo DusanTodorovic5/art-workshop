@@ -23,5 +23,13 @@ workshopRouter.route('/get_comments').post(
     (req, res) => new WorkshopController().get_comments(req, res)
 );
 
+workshopRouter.route('/get_attended').post(
+    (req, res) => new WorkshopController().get_attended(req, res)
+);
+
+workshopRouter.route('/get_comments_for_user').post(
+    (req, res) => new WorkshopController().get_comments_for_user(req, res)
+);
+
 
 export default workshopRouter;
