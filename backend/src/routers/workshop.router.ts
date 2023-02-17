@@ -29,7 +29,14 @@ workshopRouter.route('/get_attended').post(
 
 workshopRouter.route('/get_comments_for_user').post(
     (req, res) => new WorkshopController().get_comments_for_user(req, res)
+);  
+
+workshopRouter.route('/remove_me').post(
+    (req, res) => new WorkshopController().remove_me(req, res)
 );
 
+workshopRouter.route('/attend').post(
+    (req, res) => new WorkshopController().attend(req, res)
+);
 
 export default workshopRouter;

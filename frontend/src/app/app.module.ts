@@ -13,6 +13,8 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { WorkshopsComponent } from './workshops/workshops.component';
 import { BecomeOrgComponent } from './become-org/become-org.component';
+import { DetailWorkshopComponent } from './detail-workshop/detail-workshop.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { BecomeOrgComponent } from './become-org/become-org.component';
     AdminLoginComponent,
     ProfileComponent,
     WorkshopsComponent,
-    BecomeOrgComponent
+    BecomeOrgComponent,
+    DetailWorkshopComponent,
+    AdminPageComponent
   ],
   imports: [
     BrowserModule,

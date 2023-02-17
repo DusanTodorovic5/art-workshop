@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
 import { BecomeOrgComponent } from './become-org/become-org.component';
+import { DetailWorkshopComponent } from './detail-workshop/detail-workshop.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -15,9 +17,10 @@ const routes: Routes = [
   {path: "adminLogin", component: AdminLoginComponent},
   {path: "userProfile", component: ProfileComponent},
   {path: "workshopsPage", component: WorkshopsComponent},
-  {path: "become_org", component: BecomeOrgComponent}
+  {path: "become_org", component: BecomeOrgComponent},
+  {path: "detail_ws", component: DetailWorkshopComponent},
+  {path: "admin_page", component: AdminPageComponent}
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

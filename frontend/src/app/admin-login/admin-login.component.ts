@@ -41,7 +41,7 @@ export class AdminLoginComponent implements OnInit {
             user.image = this.extension_from_char(response["image"].charAt(0)) + response["image"];
           }
           localStorage.setItem('user', JSON.stringify(user));
-          this.router.navigate([""]);
+          this.router.navigate(["admin_page"]);
         });
       }
     });
