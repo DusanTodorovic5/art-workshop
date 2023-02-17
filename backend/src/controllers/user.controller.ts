@@ -73,63 +73,55 @@ export class UserController {
             return;
         }
 
-        check_size(image).then((val) => {
-            if (!val) {
-                res.json({ "message": "bad image format." });
-                return;
-            }
-
-            User.findOne({ 'username': username }, (err, username_user) => {
-                if (err) { console.log(err); }
-                else {
-                    if (username_user) {
-                        res.json({ "message": "username taken!" });
-                        return;
-                    }
-
-                    User.findOne({ 'email': email }, (err, email_user) => {
-                        if (err) { console.log(err); }
-                        else {
-                            if (email_user) {
-                                res.json({ "message": "email taken!" });
-                                return;
-                            }
-
-                            const new_user = new User({
-                                "username": username,
-                                "password": password,
-                                "name": name,
-                                "surname": surname,
-                                "number": number,
-                                "email": email,
-                                "type": type,
-                                "organization": org ? null : {
-                                    "name": org.name,
-                                    "address": org.address,
-                                    "number": org.number
-                                },
-                                "password_valid": 0,
-                                "status": "pending"
-                            });
-
-                            new_user.save(function (err) {
-                                if (err) {
-                                    res.json({ "message": "error while inserting!" });
-                                } else {
-                                    if (image) base64_to_image(image, username);
-                                    res.json({ "message": "success" });
-                                }
-                            });
-                        }
-                    });
+        User.findOne({ 'username': username }, (err, username_user) => {
+            if (err) { console.log(err); }
+            else {
+                if (username_user) {
+                    res.json({ "message": "username taken!" });
+                    return;
                 }
-            });
+
+                User.findOne({ 'email': email }, (err, email_user) => {
+                    if (err) { console.log(err); }
+                    else {
+                        if (email_user) {
+                            res.json({ "message": "email taken!" });
+                            return;
+                        }
+
+                        const new_user = new User({
+                            "username": username,
+                            "password": password,
+                            "name": name,
+                            "surname": surname,
+                            "number": number,
+                            "email": email,
+                            "type": type,
+                            "organization": org ? null : {
+                                "name": org.name,
+                                "address": org.address,
+                                "number": org.number
+                            },
+                            "password_valid": 0,
+                            "status": "pending"
+                        });
+                        new_user.save(function (err) {
+                            if (err) {
+                                res.json({ "message": "error while inserting!" });
+                            } else {
+                                if (image) base64_to_image(image, username);
+                                res.json({ "message": "success" });
+                            }
+                        });
+                    }
+                });
+            }
         });
     }
 
     get_image_for_user = (req: express.Request, res: express.Response) => {
         if (req.body.username == null) {
-            res.json({"message": "no username given"});
+            res.json({ "message": "no username given" });
         }
         res.json({ "image": image_to_base64(req.body.username) });
     }
@@ -161,7 +153,7 @@ export class UserController {
                 if (number) user.number = number;
                 if (email) user.email = email;
                 if (image) base64_to_image(username, image);
-                
+
                 user.save();
                 res.json({ "message": "success" });
             }
@@ -169,15 +161,15 @@ export class UserController {
     }
 
     actions = (req: express.Request, res: express.Response) => {
-        let username  = req.body.username;
+        let username = req.body.username;
 
         User.findOne({ 'username': username }, (err, username_user) => {
             if (err) { console.log(err); }
             else {
-                Comment.find({'username': username}, (err, comments) => {
-                    if (err) { res.json({"likes": username_user.likes, "comments": []}); }
+                Comment.find({ 'username': username }, (err, comments) => {
+                    if (err) { res.json({ "likes": username_user.likes, "comments": [] }); }
                     else {
-                        res.json({"likes": username_user.likes, "comments": comments});
+                        res.json({ "likes": username_user.likes, "comments": comments });
                     }
                 });
             }

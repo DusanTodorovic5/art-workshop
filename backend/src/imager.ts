@@ -90,21 +90,23 @@ export function image_to_base64(username) {
 }
 
 export function check_size(base64Raw) {
-  const Canvas = require('canvas');
+  const header = atob(base64Raw.slice(0, 50)).slice(16,24)
+  const uint8 = Uint8Array.from(header, c => c.charCodeAt(0))
+  const dataView = new DataView(uint8.buffer)
 
-  return new Promise(function (resolved, rejected) {
-    if (base64Raw == null) return true;
+  const size = {
+    width: dataView.getInt32(0),
+    height: dataView.getInt32(4)
+  }
+  console.log(size);
 
-    var img = new Canvas.Image();
-    img.onload = function () {
-      if (img.naturalHeight > 300 || img.naturalHeight < 100 ||
-        img.naturalWidth > 300 || img.naturalWidth < 100) {
-        resolved(false);
-      }
-      else {
-        resolved(true);
-      }
-    };
-    img.src = base64Raw;
-  });
+  if (size.width > 300 || size.width < 100) {
+    return false;
+  }
+
+  if (size.height > 300 || size.height < 100) {
+    return false;
+  }
+
+  return true;
 }
