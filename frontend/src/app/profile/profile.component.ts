@@ -46,7 +46,25 @@ export class ProfileComponent implements OnInit {
       this.number = this.user.phone;
       this.email = this.user.email;
       this.image = this.user.image;
-      this.ws = new WebSocket("ws://localhost:4001/");
+      this.set_up_ws();
+
+      this.workshopService.get_attended(this.user.username).subscribe((workshops: Array<Workshop>) => {
+        this.atended = workshops;
+        for (let w of this.atended) {
+          if (w.main_icon) {
+            w.main_icon = this.extension_from_char(w.main_icon.charAt(0)) + w.main_icon;
+          }
+        }
+      });
+      this.workshopService.get_comments_for_user(this.user.username).subscribe((comments: Array<CommentModel>) => {
+        this.comments = comments;
+      });
+
+    }
+  }
+
+  set_up_ws() {
+    this.ws = new WebSocket("ws://localhost:4001/");
       this.ws.onopen = (evt) => {
         this.ws.send("{\"username\":\"" + this.user.username + "\"}");
       }
@@ -93,20 +111,6 @@ export class ProfileComponent implements OnInit {
           this.messages = arr;
         }
       }
-
-      this.workshopService.get_attended(this.user.username).subscribe((workshops: Array<Workshop>) => {
-        this.atended = workshops;
-        for (let w of this.atended) {
-          if (w.main_icon) {
-            w.main_icon = this.extension_from_char(w.main_icon.charAt(0)) + w.main_icon;
-          }
-        }
-      });
-      this.workshopService.get_comments_for_user(this.user.username).subscribe((comments: Array<CommentModel>) => {
-        this.comments = comments;
-      });
-
-    }
   }
 
   print_date(timestamp) {
