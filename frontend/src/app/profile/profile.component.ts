@@ -27,6 +27,11 @@ export class ProfileComponent implements OnInit {
   sortDateSwitch: boolean;
   atended: Array<Workshop>;
   comments: Array<CommentModel>;
+
+  current_password: string = "";
+  new_password1: string = "";
+  new_password2: string = "";
+  message_password: string = "";
   @ViewChild(NavigationBarComponent) child: NavigationBarComponent;
   constructor(private workshopService: WorkshopService, private userService: UsersService, private router: Router) { }
 
@@ -70,6 +75,17 @@ export class ProfileComponent implements OnInit {
         localStorage.setItem("user", JSON.stringify(this.user));
         this.child.update_user();
       }
+    });
+  }
+
+  update_password() {
+    if (this.new_password1 != this.new_password2) {
+      this.message_password = "Password entered do not match!";
+      return;
+    }
+
+    this.userService.password_change(this.user.username, this.current_password, this.new_password1).subscribe((user: Object)=>{
+      this.message_password = user["message"];
     });
   }
 
