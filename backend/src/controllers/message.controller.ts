@@ -14,7 +14,7 @@ export class MessageController {
 
     send = (from, to, text) => {
         Message.findOne({ "$and": [{ "users": from }, { "users": to }] }, (err, user) => {
-            if (err) {
+            if (!user) {
                 const new_messages = new Message({
                     "users": [from, to],
                     "messages": [{
