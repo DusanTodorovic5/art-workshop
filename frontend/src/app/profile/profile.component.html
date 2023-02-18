@@ -201,8 +201,8 @@
                                             <div>
                                                 <div *ngIf="message.from != user.username"
                                                     class="d-flex flex-row justify-content-start mb-0">
-                                                    <img *ngIf="chat.image" src={{chat.image}} class="rounded-circle mb-0"
-                                                        style="width: 40px; height:40;">
+                                                    <img *ngIf="chat.image" src={{chat.image}}
+                                                        class="rounded-circle mb-0" style="width: 40px; height:40;">
                                                     <img *ngIf="!chat.image" src="/assets/holder.png"
                                                         class="rounded-circle mb-0" style="width: 40px; height:40;">
                                                     <div class="p-3 ms-2"
@@ -217,14 +217,18 @@
                                                         style="border-radius: 15px; background-color: #fbfbfb;">
                                                         <p class="small mb-0">{{message.text}}</p>
                                                     </div>
-                                                    <img *ngIf="user.image" src={{user.image}} class="rounded-circle mb-0"
-                                                        style="width: 40px; height:40;">
-                                                    <img *ngIf="!user.image" src="/assets/holder.png" 
+                                                    <img *ngIf="user.image" src={{user.image}}
+                                                        class="rounded-circle mb-0" style="width: 40px; height:40;">
+                                                    <img *ngIf="!user.image" src="/assets/holder.png"
                                                         class="rounded-circle mb-0" style="width: 40px; height:40;">
 
                                                 </div>
-                                                <p *ngIf="message.from != user.username" class="small me-1 mb-3 mt-0 rounded-3 text-muted d-flex justify-content-start">{{ print_date(message.timestamp) }}</p>
-                                                <p *ngIf="message.from == user.username" class="small me-1 mb-3 mt-0 rounded-3 text-muted d-flex justify-content-end">{{ print_date(message.timestamp) }}</p>
+                                                <p *ngIf="message.from != user.username"
+                                                    class="small me-1 mb-3 mt-0 rounded-3 text-muted d-flex justify-content-start">
+                                                    {{ print_date(message.timestamp) }}</p>
+                                                <p *ngIf="message.from == user.username"
+                                                    class="small me-1 mb-3 mt-0 rounded-3 text-muted d-flex justify-content-end">
+                                                    {{ print_date(message.timestamp) }}</p>
                                             </div>
                                         </div>
                                     </div>
