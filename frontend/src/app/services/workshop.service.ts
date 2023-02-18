@@ -65,4 +65,22 @@ export class WorkshopService {
 
       return this.http.post(`${this.uri}/attend`, data);
     }
+
+    unasign_for(username, workshop) {
+      const data = {
+        "username": username,
+        "workshop": workshop
+      };
+
+      return this.http.post(`${this.uri}/unasign_for`, data);
+    }
+
+    sign_for(username, workshop) {
+      const data = {
+        "username": username,
+        "workshop": workshop
+      };
+
+      return this.http.post(`${this.uri}/sign_for`, data);
+    }
   }

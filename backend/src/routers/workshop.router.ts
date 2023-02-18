@@ -39,4 +39,12 @@ workshopRouter.route('/attend').post(
     (req, res) => new WorkshopController().attend(req, res)
 );
 
+workshopRouter.route('/unasign_for').post(
+    (req, res) => new WorkshopController().unasign_for(req, res)
+);
+
+workshopRouter.route('/sign_for').post(
+    (req, res) => new WorkshopController().sign_for(req, res)
+);
+
 export default workshopRouter;

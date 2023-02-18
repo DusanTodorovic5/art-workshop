@@ -33,6 +33,9 @@ let Workshop = new Schema({
     },
     max_number: {
         type: Number
+    },
+    signed: {
+        type: Array
     }
 });
 

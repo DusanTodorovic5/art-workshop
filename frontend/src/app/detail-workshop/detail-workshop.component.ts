@@ -25,7 +25,7 @@ export class DetailWorkshopComponent implements OnInit {
       return false;
     }
 
-    for (var s of this.workshop.attendees) {
+    for (var s of this.workshop.signed) {
       if (s == this.user.username) {
         return false;
       }
@@ -34,21 +34,21 @@ export class DetailWorkshopComponent implements OnInit {
   }
 
   signin() {
-    this.workshopService.attend(this.user.username, this.workshop.name).subscribe((res: Object) => {
+    this.workshopService.sign_for(this.user.username, this.workshop.name).subscribe((res: Object) => {
       this.message = res["message"];
       if (this.message == "success") {
-        this.workshop.attendees.push(this.user.username);
+        this.workshop.signed.push(this.user.username);
       }
     });
   }
 
   remove() {
-    this.workshopService.remove_me(this.user.username, this.workshop.name).subscribe((res: Object) => {
+    this.workshopService.unasign_for(this.user.username, this.workshop.name).subscribe((res: Object) => {
       this.message = res["message"];
       if (this.message == "success") {
         var index = this.workshop.attendees.indexOf(this.user.username);
         if (index !== -1) {
-          this.workshop.attendees.splice(index, 1);
+          this.workshop.signed.splice(index, 1);
         }
       }
     });

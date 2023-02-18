@@ -46,7 +46,7 @@ export class WorkshopController {
             }, function (err) {
                 if (err) {
                     console.log(err);
-                    res.json({"message": "error"});
+                    res.json({"message": err});
                     return;
                 }
                 res.json({"message": "success"});
@@ -66,7 +66,47 @@ export class WorkshopController {
             }, function (err) {
                 if (err) {
                     console.log(err);
-                    res.json({"message": "error"});
+                    res.json({"message": err});
+                    return;
+                }
+                res.json({"message": "success"});
+            }
+        );
+    }
+
+    sign_for = (req: express.Request, res: express.Response) => {
+        var username = req.body.username;
+        var workshop = req.body.workshop;
+        Workshop.updateOne(
+            { "name": workshop },
+            {
+                "$push": {
+                    "signed": username
+                }
+            }, function (err) {
+                if (err) {
+                    console.log(err);
+                    res.json({"message": err});
+                    return;
+                }
+                res.json({"message": "success"});
+            }
+        );
+    }
+
+    unasign_for = (req: express.Request, res: express.Response) => {
+        var username = req.body.username;
+        var workshop = req.body.workshop;
+        Workshop.updateOne(
+            { "name": workshop },
+            {
+                "$pull": {
+                    "signed": username
+                }
+            }, function (err) {
+                if (err) {
+                    console.log(err);
+                    res.json({"message": err});
                     return;
                 }
                 res.json({"message": "success"});
