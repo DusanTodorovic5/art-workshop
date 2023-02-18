@@ -15,7 +15,6 @@ export class MessageController {
     send = (from, to, text) => {
         Message.findOne({ "$and": [{ "users": from }, { "users": to }] }, (err, user) => {
             if (err) {
-                console.log(err);
                 const new_messages = new Message({
                     "users": [from, to],
                     "messages": [{
@@ -55,10 +54,10 @@ export class MessageController {
     get = (username, ws) => {
         Message.find({ "users": username }, (err, messages) => {
             if (err) {
-                ws.send("[]");
+                ws.send(JSON.stringify([]));
             }
             else {
-                ws.send(messages.toString())
+                ws.send(JSON.stringify(messages));
             }
         });
     }
@@ -74,10 +73,10 @@ export class MessageController {
                 let text = parsed_data.text;
                 if (to != null && from != null && text != null) {
                     if (clients.get(to) != null) {
-                        clients.get(to).send(data);
+                        clients.get(to).send(JSON.stringify(parsed_data));
                     }
                     this.send(from, to, text);
-                    ws.send(data);
+                    ws.send(JSON.stringify(parsed_data));
                 }
             } else if (parsed_data.username != null) {
                 let username = parsed_data.username;
