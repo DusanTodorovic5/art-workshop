@@ -25,9 +25,9 @@
     </form>
     <br>
     <div class="row">
-        <div class="col-6 col-xs-12">
+        <div class="col-md-8 col-sm-12">
             <h1>All workshops</h1>
-            <table class="table table-striped">
+            <table class="table table-striped table-sm">
                 <thead>
                     <tr>
                         <th scope="col">Picture</th>
@@ -52,7 +52,7 @@
                         <td>
                             {{w.place}}
                         </td>
-                        <td>
+                        <td class="text-wrap">
                             {{w.description}}
                         </td>
                         <td *ngIf="user && user.type == 'user'">
@@ -62,16 +62,15 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-6 col-xs-12">
-            <h1>Top 5 workshops</h1>
-            <table class="table table-striped">
+        <div class="col-md-4 col-sm-12">
+            <h1>Top 5</h1>
+            <table class="table table-striped table-sm">
                 <thead>
                     <tr>
                         <th scope="col">Picture</th>
                         <th scope="col">Name</th>
                         <th scope="col">Date</th>
                         <th scope="col">Place</th>
-                        <th scope="col">Description</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -88,9 +87,6 @@
                         </td>
                         <td>
                             {{w.place}}
-                        </td>
-                        <td>
-                            {{w.description}}
                         </td>
                     </tr>
                 </tbody>
