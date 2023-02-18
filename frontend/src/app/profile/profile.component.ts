@@ -86,6 +86,10 @@ export class ProfileComponent implements OnInit {
 
     this.userService.password_change(this.user.username, this.current_password, this.new_password1).subscribe((user: Object)=>{
       this.message_password = user["message"];
+      if (this.message_password == "success") {
+        localStorage.clear();
+        this.router.navigate(["login"]);
+      }
     });
   }
 
