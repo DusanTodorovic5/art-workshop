@@ -24,16 +24,17 @@ export class LandingComponent implements OnInit {
     this.user  = JSON.parse(localStorage.getItem("user"));
     this.workshopService.get().subscribe((workshops: Array<Workshop>)=>{
       this.workshops = workshops;
-      this.top5 = workshops;
-      this.top5.sort((t1, t2)=>{
-        return t2.likes - t1.likes;
-      });
-      this.top5 = this.top5.slice(0, 5);
       for (let w of this.workshops) {
         if (w.main_icon) {
           w.main_icon = this.extension_from_char(w.main_icon.charAt(0)) + w.main_icon;
         }
       }
+      
+      this.top5 = workshops;
+      this.top5.sort((t1, t2)=>{
+        return t2.likes - t1.likes;
+      });
+      this.top5 = this.top5.slice(0, 5);
     });
   }
 
