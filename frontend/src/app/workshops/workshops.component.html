@@ -1,1 +1,97 @@
-<p>workshops works!</p>
+<app-navigation-bar></app-navigation-bar>
+<div class="container">
+    <br>
+    <form>
+        <div class="row">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Search by name" 
+                name="searchCriteriaName" [(ngModel)]="searchCriteriaName">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Search by place"
+                name="searchCriteriaPlace" [(ngModel)]="searchCriteriaPlace">
+            </div>
+            <div class="col-2">
+                <button class="btn btn-primary" (click)="search()">Search</button>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary m-1" (click)="sortByName()">Sort by name</button>
+                <button class="btn btn-primary m-1" (click)="sortByDate()">Sort by date</button>
+            </div>
+        </div>
+    </form>
+    <br>
+    <div class="row">
+        <div class="col-md-8 col-sm-12">
+            <h1>All workshops</h1>
+            <table class="table table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">Picture</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Place</th>
+                        <th scope="col">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let w of workshops">
+                        <td cope="row">
+                            <img *ngIf="w.main_icon" src={{w.main_icon}} height="100">
+                            <img *ngIf="!w.main_icon" src="/assets/holder.png" height="100">
+                        </td>
+                        <td>
+                            {{w.name}}
+                        </td>
+                        <td>
+                            {{w.date | date: 'dd-MM-yyyy'}}
+                        </td>
+                        <td>
+                            {{w.place}}
+                        </td>
+                        <td class="text-wrap">
+                            {{w.description}}
+                        </td>
+                        <td *ngIf="user && user.type == 'user'">
+                            <button class="btn btn-primary m-1" (click)="details(w)">Details</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <h1>Signed for</h1>
+            <table class="table table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">Picture</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let w of signed_for">
+                        <td cope="row">
+                            <img *ngIf="w.main_icon" src={{w.main_icon}} height="100">
+                            <img *ngIf="!w.main_icon" src="/assets/holder.png" height="100">
+                        </td>
+                        <td>
+                            {{w.name}}
+                        </td>
+                        <td>
+                            {{workshop_in(w)}}
+                        </td>
+                        <td *ngIf="unasignable(w)">
+                            <button class="btn btn-primary m-1" (click)="unassign(w)">Unasign</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</div>
