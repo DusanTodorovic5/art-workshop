@@ -6,6 +6,7 @@ import { BecomeOrgComponent } from './become-org/become-org.component';
 import { DetailWorkshopComponent } from './detail-workshop/detail-workshop.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
+import { NewWorkshopComponent } from './new-workshop/new-workshop.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { WorkshopsComponent } from './workshops/workshops.component';
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path: "workshopsPage", component: WorkshopsComponent},
   {path: "become_org", component: BecomeOrgComponent},
   {path: "detail_ws", component: DetailWorkshopComponent},
-  {path: "admin_page", component: AdminPageComponent}
+  {path: "admin_page", component: AdminPageComponent},
+  {path: "new_workshop", component: NewWorkshopComponent}
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

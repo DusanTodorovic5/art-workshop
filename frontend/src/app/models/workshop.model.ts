@@ -9,5 +9,6 @@ export class Workshop {
     main_icon: string;
     icons: Array<string>;
     max_number: number;
+    organizer: string;
     signed: Array<string>;
 }

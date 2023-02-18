@@ -46,6 +46,10 @@ export class NavigationBarComponent implements OnInit {
     this.router.navigate(["become_org"]);
   }
 
+  new_workshop() {
+    this.router.navigate(["new_workshop"]);
+  }
+
   logout() {
     localStorage.clear();
     this.user = null;

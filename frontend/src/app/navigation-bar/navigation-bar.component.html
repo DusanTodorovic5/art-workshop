@@ -18,7 +18,7 @@
   </div>
 </nav>
 
-<nav *ngIf="user && user.type == 'user'" class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav *ngIf="user && (user.type == 'user' || user.type == 'organizator')" class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
     <div class="navbar-brand">
       <img *ngIf="user.image" src={{user.image}} class="rounded-circle" height="50px">
@@ -38,44 +38,14 @@
         <li class="nav-item active">
           <a class="nav-link" (click)="workshops()">Workshops</a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item active" *ngIf="user.type != 'organizator'">
           <a class="nav-link" (click)="become_org()">Become organizator</a>
+        </li>
+        <li class="nav-item active" *ngIf="user.type == 'organizator'">
+          <a class="nav-link" (click)="new_workshop()">New Workshop</a>
         </li>
         <li class="nav-item active">
           <a class="nav-link" (click)="logout()">Logout</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<nav *ngIf="user && user.type == 'organizator'" class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <div class="navbar-brand" href="#">
-      <img *ngIf="user.image" src={{user.image}} class="rounded-circle" height="50px">
-      <img *ngIf="!user.image" src="/assets/holder.png" class="rounded-circle" height="50px">
-      {{user.username}}
-    </div>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="nav navbar-nav ms-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Sign Up</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Login</a>
         </li>
       </ul>
     </div>

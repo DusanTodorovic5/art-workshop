@@ -15,6 +15,7 @@ import { WorkshopsComponent } from './workshops/workshops.component';
 import { BecomeOrgComponent } from './become-org/become-org.component';
 import { DetailWorkshopComponent } from './detail-workshop/detail-workshop.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
+import { NewWorkshopComponent } from './new-workshop/new-workshop.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
     WorkshopsComponent,
     BecomeOrgComponent,
     DetailWorkshopComponent,
-    AdminPageComponent
+    AdminPageComponent,
+    NewWorkshopComponent
   ],
   imports: [
     BrowserModule,
