@@ -36,6 +36,9 @@ let Workshop = new Schema({
     },
     signed: {
         type: Array
+    },
+    organizer: {
+        type: String
     }
 });
 
