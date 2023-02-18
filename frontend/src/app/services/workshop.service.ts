@@ -40,6 +40,14 @@ export class WorkshopService {
       return this.http.post(`${this.uri}/get_attended`, data);
     }
 
+    get_mine(username) {
+      const data = {
+        "username": username
+      };
+
+      return this.http.post(`${this.uri}/get_mine`, data);
+    }
+
     get_comments_for_user(username) {
       const data = {
         "username": username

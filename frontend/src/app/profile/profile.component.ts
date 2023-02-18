@@ -35,6 +35,7 @@ export class ProfileComponent implements OnInit {
   message_password: string = "";
   ws: WebSocket;
   messages: Array<Chat>;
+  my_workshops : Array<Workshop>;
   @ViewChild(NavigationBarComponent) child: NavigationBarComponent;
   constructor(private workshopService: WorkshopService, private userService: UsersService, private router: Router) { }
 
@@ -60,6 +61,16 @@ export class ProfileComponent implements OnInit {
         this.comments = comments;
       });
 
+      if (this.user.type != 'user') {
+        this.workshopService.get_mine(this.user.username).subscribe((workshops: Array<Workshop>) => {
+          this.my_workshops = workshops;
+          for (let w of this.my_workshops) {
+            if (w.main_icon) {
+              w.main_icon = this.extension_from_char(w.main_icon.charAt(0)) + w.main_icon;
+            }
+          }
+        });
+      }
     }
   }
 
@@ -280,5 +291,10 @@ export class ProfileComponent implements OnInit {
     if (type == 'i') return "data:image/png;base64,"
     if (type == 'U') return "data:image/webp;base64,"
     return "";
+  }
+
+  see_chats(workshop) {
+    localStorage.setItem("chat_workshop", JSON.stringify(workshop));
+    this.router.navigate(["workshop-chat"]);
   }
 }

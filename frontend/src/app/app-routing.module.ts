@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { BecomeOrgComponent } from './become-org/become-org.component';
+import { ChatWorkshopComponent } from './chat-workshop/chat-workshop.component';
 import { DetailWorkshopComponent } from './detail-workshop/detail-workshop.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
@@ -21,7 +22,8 @@ const routes: Routes = [
   {path: "become_org", component: BecomeOrgComponent},
   {path: "detail_ws", component: DetailWorkshopComponent},
   {path: "admin_page", component: AdminPageComponent},
-  {path: "new_workshop", component: NewWorkshopComponent}
+  {path: "new_workshop", component: NewWorkshopComponent},
+  {path: "workshop-chat", component: ChatWorkshopComponent}
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

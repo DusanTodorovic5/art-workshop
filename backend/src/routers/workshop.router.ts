@@ -47,4 +47,8 @@ workshopRouter.route('/sign_for').post(
     (req, res) => new WorkshopController().sign_for(req, res)
 );
 
+workshopRouter.route('/get_mine').post(
+    (req, res) => new WorkshopController().get_mine(req, res)
+);
+
 export default workshopRouter;

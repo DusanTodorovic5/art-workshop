@@ -1,1 +1,72 @@
-<p>new-workshop works!</p>
+<app-navigation-bar></app-navigation-bar>
+<div class="container">
+<form>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Username</label>
+        <input type="text" class="form-control" id="exampleInputEmail1"
+            placeholder="Username" name="username" [(ngModel)]='username'>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" name="password" [(ngModel)]='password' class="form-control" 
+        id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Repeat password</label>
+        <input type="password" name="again_password" [(ngModel)]='again_password' class="form-control" 
+        id="exampleInputPassword1" placeholder="Repeat password">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputname">Name</label>
+        <input type="text" name="name" [(ngModel)]='name' class="form-control" placeholder="Name"
+        id="exampleInputname">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputsurname">Surname</label>
+        <input type="text" name="surname" [(ngModel)]='surname' class="form-control" 
+        id="exampleInputsurname" placeholder="Surname">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputemail">Email</label>
+        <input type="email" name="email" [(ngModel)]='email' class="form-control" 
+        id="exampleInputemail" placeholder="Email">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputnumber">Number</label>
+        <input type="number" name="number" [(ngModel)]='number' class="form-control" 
+        id="exampleInputnumber" placeholder="Number">
+    </div>
+    <div class="form-group">
+        <label for="exampleDropDownSelect1">Select user type:</label>
+        <select class="form-select" id="exampleDropDownSelect1" name="type" [(ngModel)]="type">
+            <option>user</option>
+            <option>organizator</option>
+        </select>
+    </div>
+    <div *ngIf="type == 'organizator'">
+        <div class="form-group">
+            <label for="exampleInputorg_name">Organization Name</label>
+            <input type="text" name="org_name" [(ngModel)]='org_name' class="form-control" 
+            id="exampleInputorg_name" placeholder="Organization Name">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputorg_address">Organization Address</label>
+            <input type="text" name="org_address" [(ngModel)]='org_address' class="form-control" 
+            id="exampleInputorg_address" placeholder="Organization Address">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputorg_number">Organization Number</label>
+            <input type="text" name="org_number" [(ngModel)]='org_number' class="form-control" 
+            id="exampleInputorg_number" placeholder="Organization Number">
+        </div>
+    </div>
+    <div class="form-group">  
+        <label for="exampleImageUpload">Profile picture</label>
+        <input accept="image/png" type="file" (change)="processFile($event)" class="form-control" 
+        id="exampleImageUpload" placeholder="Profile Picture">
+    </div>
+    <br>
+    <input type='button' value='Login' (click)='register()' class="btn btn-primary">
+</form>
+<span class='greska'>{{message}}</span>
+</div>
