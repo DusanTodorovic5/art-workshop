@@ -62,6 +62,9 @@ export class WorkshopController {
             {
                 "$push": {
                     "attendees": username
+                },
+                "$pull": {
+                    "signed": username
                 }
             }, function (err) {
                 if (err) {

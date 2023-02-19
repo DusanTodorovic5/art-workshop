@@ -37,7 +37,7 @@
                 id="exampleImageUpload" placeholder="Profile Picture" title="{{images.length}} images taken" multiple>
         </div>
         <br>
-        <img *ngFor="let image of images" src={{image}} (click)="remove_image(image)">
+        <img *ngFor="let image of images" src={{image}} (click)="remove_image(image)" width="200px">
         <br>
         <input type='button' value='Update' (click)='update_old()' class="btn btn-primary">
         <input type='button' value='Save as Template' (click)='saveTemplateAsFile()' class="btn btn-primary m-2">

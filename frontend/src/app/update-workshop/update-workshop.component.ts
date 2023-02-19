@@ -163,4 +163,43 @@ export class UpdateWorkshopComponent implements OnInit {
     link.remove()
   }
 
+  accept_user(user: string) {
+    this.workshopService.attend(user, this.workshop.name).subscribe((res: Object) => {
+      this.message = res["message"];
+      if (this.message == "success") {
+        let arrr = this.workshop.signed;
+        this.workshop.signed = [];
+        var index = arrr.indexOf(user);
+        if (index !== -1) {
+          arrr.splice(index, 1);
+        }
+        this.workshop.signed = arrr;
+        this.workshop.attendees.push(user);
+      }
+    });
+  }
+
+  reject_user(user: string) {
+    this.workshopService.unasign_for(user, this.workshop.name).subscribe((res: Object) => {
+      this.message = res["message"];
+      if (this.message == "success") {
+        var index = this.workshop.signed.indexOf(user);
+        if (index !== -1) {
+          this.workshop.signed.splice(index, 1);
+        }
+      }
+    });
+  }
+
+  remove_user(user: string) {
+    this.workshopService.remove_me(user, this.workshop.name).subscribe((res: Object) => {
+      this.message = res["message"];
+      if (this.message == "success") {
+        var index = this.workshop.attendees.indexOf(user);
+        if (index !== -1) {
+          this.workshop.attendees.splice(index, 1);
+        }
+      }
+    });
+  }
 }
