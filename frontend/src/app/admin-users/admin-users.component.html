@@ -1,1 +1,42 @@
-<p>admin-users works!</p>
+<app-navigation-bar></app-navigation-bar>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h3>My Profile</h3>
+            <form *ngIf="user">
+                <div class="form-group">
+                    <label for="forUsername">Username</label>
+                    <input type="text" class="form-control" id="forUsername" placeholder="{{user.username}}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="forName">Name</label>
+                    <input type="text" name="name" [(ngModel)]='name' class="form-control" id="forName"
+                        placeholder="{{name}}">
+                </div>
+                <div class="form-group">
+                    <label for="forSurname">Surname</label>
+                    <input type="text" name="surname" [(ngModel)]='surname' class="form-control" id="forSurname"
+                        placeholder="{{surname}}">
+                </div>
+                <div class="form-group">
+                    <label for="forPhone">Phone number</label>
+                    <input type="text" name="number" [(ngModel)]='number' class="form-control" id="forPhone"
+                        placeholder="{{number}}">
+                </div>
+                <div class="form-group">
+                    <label for="forEmail">Email</label>
+                    <input type="text" name="email" [(ngModel)]='email' class="form-control" id="forEmail"
+                        placeholder="{{email}}">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="exampleImageUpload">Profile picture</label>
+                    <input accept="image/png" type="file" (change)="processFile($event)" class="form-control"
+                        id="exampleImageUpload" placeholder="Profile Picture">
+                </div>
+                <br>
+                <input type='button' value='Update' (click)='update()' class="btn btn-primary">
+            </form>
+            <span>{{message}}</span>
+        </div></div></div>

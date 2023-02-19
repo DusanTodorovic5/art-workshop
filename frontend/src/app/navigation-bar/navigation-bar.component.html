@@ -57,7 +57,8 @@
     <div class="navbar-brand" href="#">
       <img *ngIf="user.image" src={{user.image}} class="rounded-circle" height="50px">
       <img *ngIf="!user.image" src="/assets/holder.png" class="rounded-circle" height="50px">
-      {{user.username}}
+      <a (click)="admin_home()" class="m-1 " style="text-decoration: none;color:white">{{user.username}}</a>
+      
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,6 +66,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="nav navbar-nav ms-auto">
+        <li class="nav-item active">
+          <a class="nav-link" (click)="admin_new_user()">New user</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" (click)="admin_new_ws()">New workshop</a>
+        </li>
         <li class="nav-item active">
           <a class="nav-link" (click)="logout()">Logout</a>
         </li>

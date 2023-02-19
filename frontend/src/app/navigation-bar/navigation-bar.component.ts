@@ -50,6 +50,18 @@ export class NavigationBarComponent implements OnInit {
     this.router.navigate(["new_workshop"]);
   }
 
+  admin_new_user() {
+    this.router.navigate(["new_admin_user"]);
+  }
+
+  admin_new_ws() {
+    this.router.navigate(["new_admin_ws"]);
+  }
+
+  admin_home() {
+    this.router.navigate(["admin_page"]);
+  }
+
   logout() {
     localStorage.clear();
     this.user = null;

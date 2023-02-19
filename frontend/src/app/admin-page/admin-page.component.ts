@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { map } from 'rxjs';
 import { User } from '../models/user.model';
 import { AdminService } from '../services/admin.service';
@@ -12,7 +13,7 @@ import { UsersService } from '../services/user.service';
 export class AdminPageComponent implements OnInit {
   user: User;
   users: Array<User>;
-  constructor(private userService: UsersService,private adminService: AdminService) { }
+  constructor(private userService: UsersService,private adminService: AdminService,private router: Router) { }
 
   ngOnInit(): void {
     this.adminService.get_users().subscribe((users: Array<User>)=>{
@@ -57,15 +58,8 @@ export class AdminPageComponent implements OnInit {
   
 
   details(user: User){
-    
-  }
-
-  new_user() {
-
-  }
-
-  new_ws() {
-    
+    localStorage.setItem("update_user",JSON.stringify(user));
+    this.router.navigate(["admin_users_page"]);
   }
 
   extension_from_char(type) {
