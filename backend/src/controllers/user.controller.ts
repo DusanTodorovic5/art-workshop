@@ -10,7 +10,7 @@ export class UserController {
         let password = req.body.password;
         let type = req.body.type;
 
-        User.findOne({ 'username': username, 'status': "active",'password': password, 'type': type, $or: [{ 'password_valid': 0 }, { 'password_valid': { $gt: (Math.floor(Date.now() / 1000) - 1800) } }] }, (err, user) => {
+        User.findOne({ 'username': username, 'status': "active", 'password': password, 'type': type, $or: [{ 'password_valid': 0 }, { 'password_valid': { $gt: (Math.floor(Date.now() / 1000) - 1800) } }] }, (err, user) => {
             if (err) { console.log(err); res.json({ "message": "error" }); }
             else res.json(user)
         })

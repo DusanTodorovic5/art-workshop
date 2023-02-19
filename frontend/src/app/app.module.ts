@@ -18,6 +18,9 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { NewWorkshopComponent } from './new-workshop/new-workshop.component';
 import { ChatWorkshopComponent } from './chat-workshop/chat-workshop.component';
 import { UpdateWorkshopComponent } from './update-workshop/update-workshop.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { AdminNewUserComponent } from './admin-new-user/admin-new-user.component';
+import { AdminNewWorkshopComponent } from './admin-new-workshop/admin-new-workshop.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { UpdateWorkshopComponent } from './update-workshop/update-workshop.compo
     AdminPageComponent,
     NewWorkshopComponent,
     ChatWorkshopComponent,
-    UpdateWorkshopComponent
+    UpdateWorkshopComponent,
+    AdminUsersComponent,
+    AdminNewUserComponent,
+    AdminNewWorkshopComponent
   ],
   imports: [
     BrowserModule,

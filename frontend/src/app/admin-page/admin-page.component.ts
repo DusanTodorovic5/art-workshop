@@ -36,17 +36,37 @@ export class AdminPageComponent implements OnInit {
   }
 
   accept(user: User) {
-
+    this.adminService.accept_user(
+      user.username
+    ).subscribe((res: Object) =>{
+      console.log(res);
+      if (res["message"] == "success") {
+        user.status = "active";
+      }
+    });
   }
 
   decline(user: User) {
-    
+    this.adminService.reject_user(user.username).subscribe((res: Object) =>{
+      console.log(res);
+      if (res["message"] == "success") {
+        user.status = "rejected";
+      }
+    });
   }
+  
 
   details(user: User){
     
   }
 
+  new_user() {
+
+  }
+
+  new_ws() {
+    
+  }
 
   extension_from_char(type) {
     if (type == '/') return "data:image/jpg;base64,"

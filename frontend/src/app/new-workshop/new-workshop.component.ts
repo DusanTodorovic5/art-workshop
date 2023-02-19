@@ -13,7 +13,7 @@ export class NewWorkshopComponent implements OnInit {
   place: string = "";
   description: string = "";
   long_description: string = "";
-  max_number: string = "";
+  max_number: number = 0;
   images: Array<string> = [];
   good_size: boolean = false;
   message: string = "";
@@ -125,5 +125,26 @@ export class NewWorkshopComponent implements OnInit {
     if (index !== -1) {
       this.images.splice(index, 1);
     }
+  }
+
+  loadTemplate(fileInput: any) {
+    if (fileInput.target.files && fileInput.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        const res = JSON.parse(e.target.result);
+        this.name = res.name;
+        this.date = res.date;
+        this.place = res.place;
+        this.description = res.description;
+        this.long_description = res.long_description;
+        this.max_number = res.max_number;
+        this.images = res.images;
+      };
+
+      reader.readAsText(fileInput.target.files[0]);
+
+    }
+
+    return true;
   }
 }

@@ -28,6 +28,11 @@ export class LandingComponent implements OnInit {
         if (w.main_icon) {
           w.main_icon = this.extension_from_char(w.main_icon.charAt(0)) + w.main_icon;
         }
+        if (w.icons) {
+          for (let i=0;i<w.icons.length;i++) {
+            w.icons[i] = this.extension_from_char(w.icons[i].charAt(0)) + w.icons[i];
+          }
+        }
       }
       
       this.top5 = workshops;

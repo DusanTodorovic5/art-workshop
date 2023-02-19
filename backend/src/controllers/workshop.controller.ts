@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { main_image_to_base64, workshop_images } from '../imager';
+import { get_workshop_icons, main_image_to_base64, update_workshop_images, workshop_images } from '../imager';
 import Workshop from '../models/workshop'
 import User from '../models/user'
 import Comment from '../models/comment'
@@ -11,6 +11,7 @@ export class WorkshopController {
             else {
                 for (let workshop of workshops) {
                     workshop.main_icon = main_image_to_base64(workshop.name)
+                    workshop.icons = get_workshop_icons(workshop.name);
                 }
                 res.json(workshops);
             }
@@ -260,7 +261,7 @@ export class WorkshopController {
             return;
         }
 
-        User.findOne({ 'name': name }, (err, workshop_exist) => {
+        Workshop.findOne({ 'name': name }, (err, workshop_exist) => {
             if (err) { console.log(err); }
             else {
                 if (workshop_exist) {
@@ -290,6 +291,44 @@ export class WorkshopController {
                         res.json({ "message": "success" });
                     }
                 });
+            }
+        });
+
+    }
+
+    update_workshop = (req: express.Request, res: express.Response) => {
+        var name = req.body.name;
+        var date = req.body.date;
+        var place = req.body.place;
+        var description = req.body.description;
+        var long_description = req.body.long_description;
+        var max_number = req.body.max_number;
+        var organizer = req.body.organizer;
+        var images = req.body.images;
+
+        if (!name || !date || !place || !description || !long_description || !max_number || !organizer) {
+            res.json({ "message": "invalid parameters" });
+            return;
+        }
+        Workshop.findOne({ 'name': name }, (err, workshop) => {
+            if (err) { console.log(err); res.json({ "message": "workshop does not exist" });}
+            else {
+                if (workshop) {
+                    workshop.name = name;
+                    workshop.date = date;
+                    workshop.place = place;
+                    workshop.description = description;
+                    workshop.long_description = long_description;
+                    workshop.max_number = max_number;
+
+                    update_workshop_images(images, name);
+
+                    workshop.save();
+                    res.json({ "message": "success" });
+                } else {
+                    res.json({ "message": "workshop does not exist" });
+                    return;
+                }
             }
         });
 

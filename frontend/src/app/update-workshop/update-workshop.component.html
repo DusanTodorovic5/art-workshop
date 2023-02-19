@@ -1,1 +1,47 @@
-<p>update-workshop works!</p>
+<app-navigation-bar></app-navigation-bar>
+<div class="container">
+    <form>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Name</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Name" name="name"
+                [(ngModel)]='name'>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Place</label>
+            <input type="text" name="place" [(ngModel)]='place' class="form-control" id="exampleInputPassword1"
+                placeholder="Place">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword2">Description</label>
+            <input type="text" name="description" [(ngModel)]='description' class="form-control"
+                id="exampleInputPassword2" placeholder="Description">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputname">Long Description</label>
+            <input type="text" name="long_description" [(ngModel)]='long_description' class="form-control"
+                placeholder="Name" id="exampleInputname">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputsurname">Maximum participants</label>
+            <input type="number" name="max_number" [(ngModel)]='max_number' class="form-control"
+                id="exampleInputsurname" placeholder="Maximum participants">
+        </div>
+        <div class="form-group">
+            <label for="datePicker">Date:</label>
+            <input type="datetime-local" id="datePicker" name="date" class="form-control"
+            [(ngModel)]='date'>
+        </div>
+        <div class="form-group">
+            <label for="exampleImageUpload">Profile picture</label>
+            <input accept="image/png" type="file" (change)="processFile($event)" class="form-control"
+                id="exampleImageUpload" placeholder="Profile Picture" title="{{images.length}} images taken" multiple>
+        </div>
+        <br>
+        <img *ngFor="let image of images" src={{image}} (click)="remove_image(image)">
+        <br>
+        <input type='button' value='Update' (click)='update_old()' class="btn btn-primary">
+        <input type='button' value='Save as Template' (click)='saveTemplateAsFile()' class="btn btn-primary m-2">
+        
+    </form>
+    <span class='greska'>{{message}}</span>
+</div>
