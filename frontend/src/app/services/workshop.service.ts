@@ -115,4 +115,19 @@ export class WorkshopService {
 
       return this.http.post(`${this.uri}/create_workshop`, data);
     }
+
+    update_workshop(name, date, place, description, long_description, max_number, organizer, images) {
+      const data = {
+        "name": name,
+        "date": date,
+        "place": place,
+        "description": description,
+        "long_description": long_description,
+        "max_number": max_number,
+        "organizer": organizer,
+        "images" : images
+      };
+
+      return this.http.post(`${this.uri}/update_workshop`, data);
+    }
   }
