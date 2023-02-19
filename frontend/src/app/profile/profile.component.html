@@ -65,7 +65,7 @@
         </div>
     </div>
     <br>
-    <div class="row">
+    <div class="row"  *ngIf="user.type != 'user'">
         <div class="col-md-8 col-sm-12">
             <h1>My workshops</h1>
             <table class="table table-striped table-sm">
@@ -183,7 +183,7 @@
             </table>
         </div>
     </div>
-    <div *ngIf="user.type == 'user'">
+    <div>
         <div class="row py-5">
             <div class="row d-flex">
                 <div class="col-2">

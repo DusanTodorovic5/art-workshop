@@ -21,6 +21,26 @@ export function base64_to_image(base64Raw, username) {
   FileSystem.writeFile(base_user_directory + username + extension_from_char(base64Raw.charAt(0)), base64Raw, 'base64', function (err) { });
 }
 
+export function workshop_images(images, workshop) {
+  const FileSystem = require("fs");
+  if (images == null || images.length == 0) {
+    return;
+  }
+
+  if (!FileSystem.existsSync(base_workshop_directory + workshop)) {
+    FileSystem.mkdirSync(base_workshop_directory + workshop);
+  }
+  
+  const directory = base_workshop_directory + workshop + "/";
+  for (let i = 0; i < images.length; i++) {
+    if (extension_from_char(images[i].charAt(0)) == null) {
+      continue;
+    }
+  
+    FileSystem.writeFile(directory + (i + 1).toString() + extension_from_char(images[i].charAt(0)), images[i], 'base64', function (err) { });
+  }
+}
+
 export function main_image_to_base64(name) {
   const FileSystem = require("fs");
 
@@ -31,22 +51,22 @@ export function main_image_to_base64(name) {
   } catch {
     bitmap = null;
   }
-  
+
   if (!bitmap) {
     try {
       bitmap = FileSystem.readFileSync(base_workshop_directory + name + "/1" + ".png");
     } catch {
       bitmap = null;
     }
-    
+
     if (!bitmap) {
       try {
         bitmap = FileSystem.readFileSync(base_workshop_directory + name + "/1" + ".webp");
       } catch {
         bitmap = null;
       }
-    } 
-  } 
+    }
+  }
 
   if (!bitmap) {
     return null;
@@ -65,32 +85,32 @@ export function image_to_base64(username) {
   } catch {
     bitmap = null;
   }
-  
+
   if (!bitmap) {
     try {
       bitmap = FileSystem.readFileSync(base_user_directory + username + ".png");
     } catch {
       bitmap = null;
     }
-    
+
     if (!bitmap) {
       try {
         bitmap = FileSystem.readFileSync(base_user_directory + username + ".webp");
       } catch {
         bitmap = null;
       }
-    } 
-  } 
+    }
+  }
 
   if (!bitmap) {
     return null;
   }
-  
+
   return Buffer.from(bitmap).toString('base64');
 }
 
 export function check_size(base64Raw) {
-  const header = atob(base64Raw.slice(0, 50)).slice(16,24)
+  const header = atob(base64Raw.slice(0, 50)).slice(16, 24)
   const uint8 = Uint8Array.from(header, c => c.charCodeAt(0))
   const dataView = new DataView(uint8.buffer)
 

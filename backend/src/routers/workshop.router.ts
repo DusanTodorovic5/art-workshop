@@ -51,4 +51,12 @@ workshopRouter.route('/get_mine').post(
     (req, res) => new WorkshopController().get_mine(req, res)
 );
 
+workshopRouter.route('/chat_on_workshop').post(
+    (req, res) => new WorkshopController().chat_on_workshop(req, res)
+);
+
+workshopRouter.route('/create_workshop').post(
+    (req, res) => new WorkshopController().create_workshop(req, res)
+);
+
 export default workshopRouter;

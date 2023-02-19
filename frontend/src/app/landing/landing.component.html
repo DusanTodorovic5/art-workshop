@@ -55,8 +55,9 @@
                         <td class="text-wrap">
                             {{w.description}}
                         </td>
-                        <td *ngIf="user && user.type == 'user'">
+                        <td *ngIf="user">
                             <button class="btn btn-primary m-1" (click)="details(w)">Details</button>
+                            <button *ngIf="user.type == 'organizator' && w.organizer == user.username" class="btn btn-primary m-1" (click)="edit(w)">Edit</button>
                         </td>
                     </tr>
                 </tbody>

@@ -11,4 +11,5 @@ export class Workshop {
     max_number: number;
     organizer: string;
     signed: Array<string>;
+    chated: Array<string>;
 }

@@ -153,6 +153,14 @@ export class DetailWorkshopComponent implements OnInit {
   }
 
   send_message(chat: Chat) {
+    if (!this.workshop.chated.includes(this.user.username)){
+      this.workshopService.chat_on_workshop(this.user.username, this.workshop.name).subscribe((res: Object) => {
+        console.log(res);
+        if (res["message"] == "success") {
+          this.workshop.chated.push(this.user.username);
+        }
+      });
+    }
     this.ws.send(JSON.stringify({
       "from": this.user.username,
       "to": this.user.username == chat.users[0] ? chat.users[1] : chat.users[0],

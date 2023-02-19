@@ -17,6 +17,7 @@ import { DetailWorkshopComponent } from './detail-workshop/detail-workshop.compo
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { NewWorkshopComponent } from './new-workshop/new-workshop.component';
 import { ChatWorkshopComponent } from './chat-workshop/chat-workshop.component';
+import { UpdateWorkshopComponent } from './update-workshop/update-workshop.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ChatWorkshopComponent } from './chat-workshop/chat-workshop.component';
     DetailWorkshopComponent,
     AdminPageComponent,
     NewWorkshopComponent,
-    ChatWorkshopComponent
+    ChatWorkshopComponent,
+    UpdateWorkshopComponent
   ],
   imports: [
     BrowserModule,

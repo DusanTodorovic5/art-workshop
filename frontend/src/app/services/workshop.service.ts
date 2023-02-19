@@ -91,4 +91,28 @@ export class WorkshopService {
 
       return this.http.post(`${this.uri}/sign_for`, data);
     }
+
+    chat_on_workshop(username, workshop) {
+      const data = {
+        "username": username,
+        "workshop": workshop
+      };
+
+      return this.http.post(`${this.uri}/chat_on_workshop`, data);
+    }
+
+    create_workshop(name, date, place, description, long_description, max_number, organizer, images) {
+      const data = {
+        "name": name,
+        "date": date,
+        "place": place,
+        "description": description,
+        "long_description": long_description,
+        "max_number": max_number,
+        "organizer": organizer,
+        "images" : images
+      };
+
+      return this.http.post(`${this.uri}/create_workshop`, data);
+    }
   }

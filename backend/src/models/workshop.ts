@@ -39,6 +39,12 @@ let Workshop = new Schema({
     },
     organizer: {
         type: String
+    },
+    chated: {
+        type: Array<String>
+    },
+    status: {
+        type: String
     }
 });
 

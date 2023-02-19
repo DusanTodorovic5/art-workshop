@@ -89,4 +89,9 @@ export class LandingComponent implements OnInit {
     localStorage.setItem("curr_workshop", JSON.stringify(w));
     this.router.navigate(["detail_ws"]);
   }
+
+  edit(w:Workshop) {
+    localStorage.setItem("curr_workshop", JSON.stringify(w));
+    this.router.navigate(["edit_ws"]);
+  }
 }

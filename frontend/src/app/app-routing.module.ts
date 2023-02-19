@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { NewWorkshopComponent } from './new-workshop/new-workshop.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
+import { UpdateWorkshopComponent } from './update-workshop/update-workshop.component';
 import { WorkshopsComponent } from './workshops/workshops.component';
 
 const routes: Routes = [
@@ -23,7 +24,8 @@ const routes: Routes = [
   {path: "detail_ws", component: DetailWorkshopComponent},
   {path: "admin_page", component: AdminPageComponent},
   {path: "new_workshop", component: NewWorkshopComponent},
-  {path: "workshop-chat", component: ChatWorkshopComponent}
+  {path: "workshop-chat", component: ChatWorkshopComponent},
+  {path: "edit_ws", component: UpdateWorkshopComponent}
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
