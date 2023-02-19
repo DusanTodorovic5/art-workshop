@@ -12,4 +12,5 @@ export class Workshop {
     organizer: string;
     signed: Array<string>;
     chated: Array<string>;
+    status: string;
 }

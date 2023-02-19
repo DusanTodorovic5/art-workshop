@@ -21,6 +21,7 @@ import { UpdateWorkshopComponent } from './update-workshop/update-workshop.compo
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminNewUserComponent } from './admin-new-user/admin-new-user.component';
 import { AdminNewWorkshopComponent } from './admin-new-workshop/admin-new-workshop.component';
+import { AdminWorkshopComponent } from './admin-workshop/admin-workshop.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { AdminNewWorkshopComponent } from './admin-new-workshop/admin-new-worksh
     UpdateWorkshopComponent,
     AdminUsersComponent,
     AdminNewUserComponent,
-    AdminNewWorkshopComponent
+    AdminNewWorkshopComponent,
+    AdminWorkshopComponent
   ],
   imports: [
     BrowserModule,

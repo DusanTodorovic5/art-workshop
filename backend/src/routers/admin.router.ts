@@ -23,6 +23,22 @@ adminRouter.route('/delete_user').post(
     (req, res) => new AdminController().delete_user(req, res)
 );
 
+adminRouter.route('/get_all_workshops').get(
+    (req, res) => new AdminController().get_all_workshops(req, res)
+);
+
+adminRouter.route('/accept_workshop').post(
+    (req, res) => new AdminController().accept_workshop(req, res)
+);
+
+adminRouter.route('/reject_workshop').post(
+    (req, res) => new AdminController().reject_workshop(req, res)
+);
+
+adminRouter.route('/delete_workshop').post(
+    (req, res) => new AdminController().delete_workshop(req, res)
+);
+
 
 export default adminRouter;
 

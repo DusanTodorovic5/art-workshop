@@ -1,51 +1,61 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user.model';
+import { Workshop } from '../models/workshop.model';
 import { WorkshopService } from '../services/workshop.service';
 
 @Component({
-  selector: 'app-new-workshop',
-  templateUrl: './new-workshop.component.html',
-  styleUrls: ['./new-workshop.component.css']
+  selector: 'app-admin-workshop',
+  templateUrl: './admin-workshop.component.html',
+  styleUrls: ['./admin-workshop.component.css']
 })
-export class NewWorkshopComponent implements OnInit {
+export class AdminWorkshopComponent implements OnInit {
+
   name: string = "";
   date: string = "";
   place: string = "";
   description: string = "";
   long_description: string = "";
-  max_number: number = 0;
+  max_number: number;
   images: Array<string> = [];
   good_size: boolean = false;
   message: string = "";
   user: User;
-  
+
+  workshop: Workshop;
   constructor(private workshopService: WorkshopService) { }
 
   ngOnInit(): void {
+    this.workshop = JSON.parse(localStorage.getItem("update_workshop"));
+    if (this.workshop) {
+      this.name = this.workshop.name;
+      this.date = this.workshop.date.toLocaleString().slice(0, 16);
+      this.place = this.workshop.place;
+      this.description = this.workshop.description;
+      this.long_description = this.workshop.long_description;
+      this.max_number = this.workshop.max_number;
+      this.images = this.workshop.icons;
+    }
     this.user = JSON.parse(localStorage.getItem("user"));
   }
 
-  create_new() {
+  update_old() {
     var upload_images = [];
     for (let img of this.images) {
       upload_images.push(img.replace(/^data:image\/[a-z]+;base64,/, ""));
     }
-    this.workshopService.create_workshop(
-      this.name, 
-      new Date(this.date), 
-      this.place, 
-      this.description, 
-      this.long_description, 
-      this.max_number, 
-      this.user.username,
+
+    this.workshopService.update_workshop(
+      this.name,
+      new Date(this.date),
+      this.place,
+      this.description,
+      this.long_description,
+      this.max_number,
+      this.workshop.organizer,
       upload_images
-    ).subscribe((res: Object) =>{
-      console.log(res);
+    ).subscribe((res: Object) => {
       if (res["message"]) {
         this.message = res["message"];
-        if (this.message == "success") {
-          alert("Succes! Wait for admin to approve");
-        }
       }
     });
   }
@@ -127,24 +137,31 @@ export class NewWorkshopComponent implements OnInit {
     }
   }
 
-  loadTemplate(fileInput: any) {
-    if (fileInput.target.files && fileInput.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        const res = JSON.parse(e.target.result);
-        this.name = res.name;
-        this.date = res.date;
-        this.place = res.place;
-        this.description = res.description;
-        this.long_description = res.long_description;
-        this.max_number = res.max_number;
-        this.images = res.images;
-      };
+  saveTemplateAsFile() {
+    const dataObjToWrite = {
+      "name": this.name,
+      "date": this.date,
+      "place": this.place,
+      "description": this.description,
+      "long_description": this.long_description,
+      "max_number": this.max_number,
+      "images": this.images,
+    };
+    const blob = new Blob([JSON.stringify(dataObjToWrite)], { type: "text/json" });
+    const link = document.createElement("a");
 
-      reader.readAsText(fileInput.target.files[0]);
+    link.download = `template_${this.workshop.name}.json`;
+    link.href = window.URL.createObjectURL(blob);
+    link.dataset['downloadurl'] = ["text/json", link.download, link.href].join(":");
 
-    }
+    const evt = new MouseEvent("click", {
+      view: window,
+      bubbles: true,
+      cancelable: true,
+    });
 
-    return true;
+    link.dispatchEvent(evt);
+    link.remove()
   }
+
 }

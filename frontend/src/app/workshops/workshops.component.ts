@@ -96,7 +96,6 @@ export class WorkshopsComponent implements OnInit {
     var diff = date.getTime() - Date.now();
     var hours = Math.floor(diff / (1000 * 60 * 60));
     var days = Math.floor(hours/24);
-    console.log(diff);
     if (days > 0) {
       return "In " + days + " days";
     }
@@ -115,6 +114,10 @@ export class WorkshopsComponent implements OnInit {
       if (res["message"] == "success") {
         var index = this.signed_for.indexOf(w);
         if (index !== -1) {
+          var index = w.signed.indexOf(this.user.username);
+          if (index !== -1) {
+            w.signed.splice(index, 1);
+          }
           this.signed_for.splice(index, 1);
         }
       }

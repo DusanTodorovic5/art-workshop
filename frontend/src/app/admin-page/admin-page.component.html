@@ -63,6 +63,9 @@
                             <div *ngIf="u.status != 'pending'">
                                 <button class="btn btn-primary m-1" (click)="details(u)">Details</button>
                             </div>
+                            <div>
+                                <button class="btn btn-primary m-1" (click)="delete(u)">Delete</button>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -71,8 +74,67 @@
     </div>
 
     <div class="row">
-        <div class="col-6 col-xs-12">
-            
+        <div class="col">
+            <h1>All Workshops</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Image</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Place</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Long Description</th>
+                        <th scope="col">Max Participants</th>
+                        <th scope="col">Organizer</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let w of workshops">
+                        <td>
+                            <img *ngIf="w.main_icon" src={{w.main_icon}} height="60">
+                            <img *ngIf="!w.main_icon" src="/assets/holder.png" height="60">
+                        </td>
+                        <td>
+                            {{w.name}}
+                        </td>
+                        <td>
+                            {{w.place}}
+                        </td>
+                        <td>
+                            {{w.description}}
+                        </td>
+                        <td>
+                            {{w.date | date: 'dd-MM-yyyy'}}
+                        </td>
+                        <td>
+                            {{w.long_description}}
+                        </td>
+                        <td>
+                            {{w.max_number}}
+                        </td>
+                        <td>
+                            {{w.organizer}}
+                        </td>
+                        <td>
+                            {{w.status}}
+                        </td>
+                        <td>
+                            <div *ngIf="w.status == 'pending'">
+                                <button class="btn btn-primary m-1" (click)="acceptw(w)">Accept</button>
+                                <button class="btn btn-primary m-1" (click)="declinew(w)">Decline</button>
+                            </div>
+                            <div *ngIf="w.status != 'pending'">
+                                <button class="btn btn-primary m-1" (click)="detailsw(w)">Details</button>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary m-1" (click)="deletesw(w)">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

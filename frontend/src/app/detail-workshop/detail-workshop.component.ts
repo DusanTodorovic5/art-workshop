@@ -21,6 +21,11 @@ export class DetailWorkshopComponent implements OnInit {
 
   ngOnInit(): void {
     this.workshop = JSON.parse(localStorage.getItem("curr_workshop"));
+    let ww = this.workshop.icons;
+    this.workshop.icons = [];
+    for (let w of ww) {
+      this.workshop.icons.push(this.extension_from_char(w.charAt(0)) + w);
+    }
     this.user = JSON.parse(localStorage.getItem("user"));
     this.set_up_ws();
   }
@@ -51,7 +56,7 @@ export class DetailWorkshopComponent implements OnInit {
     this.workshopService.unasign_for(this.user.username, this.workshop.name).subscribe((res: Object) => {
       this.message = res["message"];
       if (this.message == "success") {
-        var index = this.workshop.attendees.indexOf(this.user.username);
+        var index = this.workshop.signed.indexOf(this.user.username);
         if (index !== -1) {
           this.workshop.signed.splice(index, 1);
         }

@@ -5,6 +5,7 @@ import { AdminNewUserComponent } from './admin-new-user/admin-new-user.component
 import { AdminNewWorkshopComponent } from './admin-new-workshop/admin-new-workshop.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { AdminWorkshopComponent } from './admin-workshop/admin-workshop.component';
 import { BecomeOrgComponent } from './become-org/become-org.component';
 import { ChatWorkshopComponent } from './chat-workshop/chat-workshop.component';
 import { DetailWorkshopComponent } from './detail-workshop/detail-workshop.component';
@@ -31,7 +32,8 @@ const routes: Routes = [
   {path: "edit_ws", component: UpdateWorkshopComponent},
   {path: "new_admin_user", component: AdminNewUserComponent},
   {path: "admin_users_page", component: AdminUsersComponent},
-  {path: "new_admin_ws", component: AdminNewWorkshopComponent}
+  {path: "new_admin_ws", component: AdminNewWorkshopComponent},
+  {path: "admin_workshops_page", component: AdminWorkshopComponent}
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -44,4 +44,33 @@ export class AdminService {
   get_users() {
     return this.http.get(`${this.uri}/get_users`);
   }
+
+  get_all_workshops() {
+    return this.http.get(`${this.uri}/get_all_workshops`);
+  }
+
+  accept_workshop(workshop) {
+    const data = {
+      "workshop": workshop,
+    };
+
+    return this.http.post(`${this.uri}/accept_workshop`, data);
+  }
+
+  reject_workshop(workshop) {
+    const data = {
+      "workshop": workshop,
+    };
+
+    return this.http.post(`${this.uri}/reject_workshop`, data);
+  }
+
+  delete_workshop(workshop) {
+    const data = {
+      "workshop": workshop,
+    };
+
+    return this.http.post(`${this.uri}/delete_workshop`, data);
+  }
+
 }
