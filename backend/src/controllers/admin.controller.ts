@@ -18,4 +18,43 @@ export class AdminController {
             else res.json(users)
         });
     }
+
+    accept_user = (req: express.Request, res: express.Response) => {
+        let username = req.body.username;
+
+        User.updateOne({ 'username': username },
+            { "status": "active" },
+            (err, user) => {
+                if (err) { console.log(err); res.json({ "message": "fail" }); }
+                else {
+                    res.json({ "message": "success" });
+                }
+            });
+    }
+
+    reject_user = (req: express.Request, res: express.Response) => {
+        let username = req.body.username;
+
+        User.updateOne({ 'username': username },
+            { "status": "rejected" },
+            (err, user) => {
+                if (err) { console.log(err); res.json({ "message": "fail" }); }
+                else {
+                    res.json({ "message": "success" });
+                }
+            });
+    }
+
+    delete_user = (req: express.Request, res: express.Response) => {
+        let username = req.body.username;
+
+        User.updateOne({ 'username': username },
+            { "status": "deleted" },
+            (err, user) => {
+                if (err) { console.log(err); res.json({ "message": "fail" }); }
+                else {
+                    res.json({ "message": "success" });
+                }
+            });
+    }
 }

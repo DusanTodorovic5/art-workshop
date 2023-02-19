@@ -17,6 +17,30 @@ export class AdminService {
     return this.http.post(`${this.uri}/login`, data);
   }
 
+  accept_user(username) {
+    const data = {
+      "username": username,
+    };
+
+    return this.http.post(`${this.uri}/accept_user`, data);
+  }
+
+  reject_user(username) {
+    const data = {
+      "username": username,
+    };
+
+    return this.http.post(`${this.uri}/reject_user`, data);
+  }
+
+  delete_user(username) {
+    const data = {
+      "username": username,
+    };
+
+    return this.http.post(`${this.uri}/delete_user`, data);
+  }
+
   get_users() {
     return this.http.get(`${this.uri}/get_users`);
   }
