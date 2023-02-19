@@ -30,15 +30,39 @@ export function workshop_images(images, workshop) {
   if (!FileSystem.existsSync(base_workshop_directory + workshop)) {
     FileSystem.mkdirSync(base_workshop_directory + workshop);
   }
-  
+
   const directory = base_workshop_directory + workshop + "/";
   for (let i = 0; i < images.length; i++) {
     if (extension_from_char(images[i].charAt(0)) == null) {
       continue;
     }
-  
+
     FileSystem.writeFile(directory + (i + 1).toString() + extension_from_char(images[i].charAt(0)), images[i], 'base64', function (err) { });
   }
+}
+
+export function get_workshop_icons(workshop) {
+  const FileSystem = require("fs");
+  const directory = base_workshop_directory + workshop;
+  var images = [];
+  
+  FileSystem.readdirSync(directory).forEach(f => { 
+    const path = `${directory}/${f}`;
+    images.push(icon_to_base64(path));
+  });
+
+  return images;
+}
+
+export function update_workshop_images(images, workshop) {
+  const FileSystem = require("fs");
+  const directory = base_workshop_directory + workshop;
+
+  FileSystem.readdirSync(directory).forEach(f => { 
+    FileSystem.rmSync(`${directory}/${f}`) 
+  });
+  
+  workshop_images(images, workshop);
 }
 
 export function main_image_to_base64(name) {
@@ -108,6 +132,25 @@ export function image_to_base64(username) {
 
   return Buffer.from(bitmap).toString('base64');
 }
+
+export function icon_to_base64(path) {
+  const FileSystem = require("fs");
+
+  var bitmap = null;
+
+  try {
+    bitmap = FileSystem.readFileSync(path);
+  } catch {
+    bitmap = null;
+  }
+
+  if (!bitmap) {
+    return null;
+  }
+
+  return Buffer.from(bitmap).toString('base64');
+}
+
 
 export function check_size(base64Raw) {
   const header = atob(base64Raw.slice(0, 50)).slice(16, 24)
