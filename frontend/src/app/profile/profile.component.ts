@@ -177,7 +177,7 @@ export class ProfileComponent implements OnInit {
         this.user.surname = this.surname;
         this.user.phone = this.number;
         this.user.email = this.email;
-        this.user.image = this.image;
+        this.user.image = this.extension_from_char(this.image.charAt(0)) + this.image;
         localStorage.setItem("user", JSON.stringify(this.user));
         this.child.update_user();
       }

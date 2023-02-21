@@ -40,6 +40,12 @@ export class RegisterComponent implements OnInit {
       this.message = "Passwords do not match!";
       return;
     }
+
+    if (!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(this.password))) {
+      this.message = "Password does not contain uppercase letter, lowercase letter or a number";
+      return;
+    }
+
     this.image = this.image.replace(/^data:image\/[a-z]+;base64,/, "");
     this.userService.register(
       this.name, 
